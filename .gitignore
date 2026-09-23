@@ -1,0 +1,67 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js Build
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Databases & Local Uploads
+*.db
+*.sqlite
+*.sqlite3
+satquery.db
+static/uploads/*
+!static/uploads/.gitkeep
+satquery-backend/static/uploads/*
+!satquery-backend/static/uploads/.gitkeep
+
+# Testing & Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
