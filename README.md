@@ -1,78 +1,17 @@
-# SatQuery AI — MVP
+﻿# SatQuery
 
-Agentic satellite imagery analysis assistant. Ask plain-language questions about satellite images and get answers with visual evidence and confidence scores.
+Agentic satellite imagery analysis platform. Ask plain-language questions about earth observation scenes and receive structured answers accompanied by visual evidence, spatial bounding boxes, and confidence metrics.
 
-## Architecture
+Designed for intelligence analysts, environmental researchers, disaster response coordinators, and geospatial developers who need fast, automated visual inspection across optical and radar satellite data without complex GIS software.
 
-- **Backend**: FastAPI + LangGraph (single service, not microservices)
-- **Frontend**: Next.js 14 + Tailwind + shadcn/ui
-- **LLM/VLM**: OpenRouter free-tier models (with fallback)
-- **Database**: PostgreSQL (Neon/Supabase)
-- **Storage**: Cloudflare R2 / Supabase Storage (S3-compatible)
+---
 
-## Project Structure
+## Core Value Proposition
 
-```
-SatQuery/
-├── satquery-backend/    # FastAPI backend
-│   ├── app/
-│   │   ├── agent/       # LangGraph nodes & graph
-│   │   ├── api/         # FastAPI routes
-│   │   ├── db/          # SQLModel + Alembic
-│   │   ├── schemas/     # Pydantic models
-│   │   └── services/    # OpenRouter, Storage, Image utils
-│   └── tests/
-└── satquery-frontend/   # Next.js frontend
-    ├── app/
-    ├── components/
-    └── lib/
-```
+- Conversational Geospatial Intelligence: Ask complex natural-language questions directly against high-resolution satellite scenes.
+- Multi-Sensor Flexibility: Process single-timestamp optical scenes, multi-temporal observation pairs, or combined optical and synthetic aperture radar (SAR) imagery.
+- Structured Evidence: Every answer includes direct visual inspection artifacts, normalized bounding coordinates, and confidence assessments.
+- Agentic Automation: Built on LangGraph state graphs that dynamically route requests to task-specific analytical specialists.
+- Zero Proprietary Lock-In: Integrates with open foundation vision-language models via OpenRouter with automatic provider fallback.
 
-## Quick Start
-
-### Backend
-```bash
-cd satquery-backend
-cp .env.example .env
-# Edit .env with your credentials
-pip install -e ".[dev]"
-alembic upgrade head
-uvicorn app.main:app --reload
-```
-
-### Frontend
-```bash
-cd satquery-frontend
-cp .env.example .env.local
-# Edit .env.local with API URL
-npm install
-npm run dev
-```
-
-## Query Types
-
-| Type | Input | Use Case |
-|------|-------|----------|
-| `single` | 1 image | VQA, captioning, grounding |
-| `bitemporal` | 2 images (T1, T2) | Change detection |
-| `optical_sar` | 2 images (optical, SAR) | Multi-modal fusion |
-
-## Deployment
-
-- **Backend**: Railway or Fly.io (always-on paid tier)
-- **Frontend**: Vercel
-- **DB**: Neon or Supabase Postgres
-- **Storage**: Cloudflare R2 or Supabase Storage
-
-## Environment Variables
-
-See `.env.example` in each subdirectory.
-
-## MVP Scope Notes
-
-- No fine-tuned models — all reasoning via prompted OpenRouter free-tier calls
-- No true geo-registration — assumes pre-aligned inputs
-- No trained change detection — pixel-diff heuristic + LLM description
-- No trained grounding — LLM-estimated bounding boxes
-- Single backend service running LangGraph agent
-- Confidence = LLM self-reported heuristic (not calibrated)
+---
