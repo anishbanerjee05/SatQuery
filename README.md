@@ -140,3 +140,14 @@ The Router node classifies incoming requests into specialist pipelines using a c
 
 ---
 
+### Node 2: Preprocess
+
+The Preprocess node prepares satellite imagery for downstream multimodal vision-language consumption:
+
+- Aspect-Ratio Resizing: Normalizes ultra-high-resolution aerial frames down to standard processing resolutions (max 1024x1024) while preserving aspect ratios to prevent geospatial distortion.
+- Format Validation: Checks uploaded buffers for valid JPEG, PNG, or TIFF headers; converts grayscale single-channel arrays into standard RGB representations.
+- Metadata Extraction: Computes width, height, aspect ratio, and channel depth stored in `image_metadata`.
+- Synthetic Fallback Generator: If no image payload is provided (e.g. during headless automated test runs), the preprocessor generates an aligned synthetic Earth observation scene with satellite coordinate grids to keep the pipeline executable.
+
+---
+
