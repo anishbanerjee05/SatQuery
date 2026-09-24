@@ -404,3 +404,44 @@ Retrieves historical satellite analysis sessions ordered by most recent submissi
 
 ---
 
+## Command-Line Usage (cURL Examples)
+
+You can query the SatQuery engine directly from your terminal or automated pipelines:
+
+### Example A: Single-Scene Grounding Query
+
+Locate specific ground assets with spatial bounding boxes:
+
+```bash
+curl -X POST "http://localhost:8000/query" \
+  -F "question=Identify and locate all cargo vessels moored at the harbor." \
+  -F "input_type=single" \
+  -F "image_single=@/path/to/harbor_satellite.jpg"
+```
+
+### Example B: Bi-temporal Environmental Change Detection
+
+Compare two multi-temporal scenes to track land-cover modification:
+
+```bash
+curl -X POST "http://localhost:8000/query" \
+  -F "question=What deforestation or land clearing occurred between these dates?" \
+  -F "input_type=bitemporal" \
+  -F "image_t1=@/path/to/amazon_2023.png" \
+  -F "image_t2=@/path/to/amazon_2025.png"
+```
+
+### Example C: Optical and SAR Sensor Fusion
+
+Analyze cloud-obscured terrain by fusing visible spectrum and radar observations:
+
+```bash
+curl -X POST "http://localhost:8000/query" \
+  -F "question=Delineate active flood inundation zones through the cloud deck." \
+  -F "input_type=optical_sar" \
+  -F "image_optical=@/path/to/flood_optical.jpg" \
+  -F "image_sar=@/path/to/flood_sentinel1_sar.tif"
+```
+
+---
+
