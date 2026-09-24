@@ -27,3 +27,46 @@ SatQuery supports three analytical modalities depending on the sensor payload an
 
 ---
 
+## End-to-End System Architecture
+
+```
++-------------------------------------------------------------------------+
+|                        Next.js 14 Frontend                              |
+|   - Interactive Command Center & Geospatial Chat Interface              |
+|   - Real-time Multi-Sensor Image Uploaders (Optical, T1/T2, SAR)        |
+|   - Canvas Bounding Box Overlays & Bi-temporal Comparison Slider        |
++------------------------------------+------------------------------------+
+                                     |
+                                     | REST API (Multipart Form-Data)
+                                     v
++-------------------------------------------------------------------------+
+|                         FastAPI Backend                                 |
+|  +--------------------+  +--------------------+  +--------------------+ |
+|  | Authentication &   |  | Storage Service    |  | Database Layer     | |
+|  | Session Manager    |  | (Cloudflare R2 /   |  | (PostgreSQL /      | |
+|  |                    |  |  Local Uploads)    |  |  SQLite Fallback)  | |
+|  +--------------------+  +--------------------+  +--------------------+ |
+|                                    |                                    |
+|                                    v                                    |
+|  +--------------------------------------------------------------------+ |
+|  |                     LangGraph Agent Workflow Engine                | |
+|  |                                                                    | |
+|  |   [Router] ---> [Preprocess] ---> [Specialist Node]                | |
+|  |                                          |                         | |
+|  |                                          v                         | |
+|  |   [Output Formatter] <----------- [Validation]                     | |
+|  +---------------------------------+----------------------------------+ |
++------------------------------------+------------------------------------+
+                                     |
+                                     | HTTPS (Vision-Language Inference)
+                                     v
++-------------------------------------------------------------------------+
+|                       OpenRouter AI Gateway                             |
+|   - Primary: google/gemini-2.0-flash-lite-001 (Fast Multi-Modal VLM)    |
+|   - Fallback 1: meta-llama/llama-3.2-11b-vision-instruct:free           |
+|   - Fallback 2: google/gemini-2.0-pro-exp-02-05:free                   |
++-------------------------------------------------------------------------+
+```
+
+---
+
