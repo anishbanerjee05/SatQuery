@@ -516,3 +516,54 @@ Deploy the Next.js frontend with optimal edge caching:
 
 ---
 
+## Repository Structure
+
+```
+SatQuery/
+├── satquery-backend/                 # FastAPI agentic backend
+│   ├── alembic/                      # Database schema migrations
+│   ├── app/
+│   │   ├── agent/                    # LangGraph multi-agent workflow
+│   │   │   ├── nodes/                # Router, Preprocess, VQA, Grounding, Fusion, Validation
+│   │   │   ├── graph.py              # StateGraph definition and compiled workflow
+│   │   │   └── state.py              # AgentState data model
+│   │   ├── api/                      # REST API route handlers
+│   │   │   ├── routes_health.py      # /health verification
+│   │   │   └── routes_query.py       # /query dispatch and /history pagination
+│   │   ├── db/                       # SQLModel engine and table definitions
+│   │   ├── schemas/                  # Pydantic input and output validation models
+│   │   └── services/                 # OpenRouter API client and Storage abstraction
+│   ├── static/uploads/               # Local image and evidence storage fallback
+│   ├── tests/                        # Automated test suites
+│   ├── Dockerfile                    # Containerization specification
+│   ├── alembic.ini                   # Migration configuration
+│   └── pyproject.toml                # Dependencies and project metadata
+│
+└── satquery-frontend/                # Next.js 14 web application
+    ├── app/                          # App router pages and layouts
+    ├── components/                   # UI components and interactive modules
+    │   ├── ui/                       # shadcn/ui base primitives
+    │   ├── Results.tsx               # Evidence viewer with bounding box canvas
+    │   └── PipelineShowcase.tsx      # Interactive LangGraph workflow explorer
+    ├── lib/                          # Client API helpers and utilities
+    ├── public/                       # Static web assets
+    ├── tailwind.config.ts            # Styling tokens and themes
+    └── package.json                  # Node dependencies and scripts
+```
+
+---
+
+## Contributing
+
+Contributions, bug reports, and feature proposals are welcome:
+
+1. Fork the repository and create a feature branch (`git checkout -b feature/sar-edge-filter`).
+2. Adhere to code styling standards (run `black` and `ruff` on Python backend files).
+3. Ensure automated tests pass (`pytest` in backend, `npm run build` in frontend).
+4. Submit a clear Pull Request describing changes and test validations.
+
+---
+
+## License
+
+This project is licensed under the Apache 2.0 License. See the [LICENSE](LICENSE) file for complete terms.
