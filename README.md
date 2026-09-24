@@ -323,3 +323,28 @@ Assembles validated state data into a strict JSON contract returned to the clien
 
 ---
 
+## Environment Configuration
+
+### Backend Environment Variables (`satquery-backend/.env`)
+
+| Variable | Requirement | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `OPENROUTER_API_KEY` | Required | None | API authentication key for OpenRouter foundation model access |
+| `DATABASE_URL` | Optional | `sqlite+aiosqlite:///./satquery.db` | PostgreSQL or SQLite database connection URI |
+| `STORAGE_PROVIDER` | Optional | `local` | Asset storage backend: `local`, `s3`, or `cloudflare_r2` |
+| `STORAGE_BUCKET_NAME`| Optional | `satquery-assets` | Target bucket name when using S3 or Cloudflare R2 |
+| `S3_ENDPOINT_URL` | Optional | None | Custom endpoint URL for Cloudflare R2 or MinIO |
+| `AWS_ACCESS_KEY_ID` | Optional | None | Storage authentication access key |
+| `AWS_SECRET_ACCESS_KEY`| Optional | None | Storage authentication secret key |
+| `PRIMARY_VLM_MODEL` | Optional | `google/gemini-2.0-flash-lite-001` | Primary vision-language model identifier |
+| `FALLBACK_VLM_MODEL` | Optional | `meta-llama/llama-3.2-11b-vision-instruct:free` | First fallback vision-language model |
+| `PORT` | Optional | `8000` | Port on which the FastAPI application listens |
+
+### Frontend Environment Variables (`satquery-frontend/.env.local`)
+
+| Variable | Requirement | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `NEXT_PUBLIC_API_URL` | Required | `http://localhost:8000` | Public base URL for the backend FastAPI endpoints |
+
+---
+
