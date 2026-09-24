@@ -186,3 +186,14 @@ Identifies specific physical features and objects within the scene and returns n
 
 ---
 
+### Node 3D: Optical-SAR Multimodal Fusion
+
+Bridges complementary remote sensing physics across visible and microwave spectra:
+
+- Optical Strengths: Provides rich spectral color, surface texture, and optical reflectance under daylight and clear-sky conditions.
+- SAR Strengths: Synthetic Aperture Radar microwave pulses penetrate cloud layers, haze, and darkness, reflecting strongly off metallic corner reflectors, urban geometry, and smooth water bodies (specular reflectance).
+- Channel Fusion: Blends optical RGB channels with SAR backscatter intensity arrays into composite multi-band false-color imagery.
+- All-Weather Intelligence: Explains scene features visible only in SAR (e.g. ships obscured beneath heavy fog banks or saturated soil boundaries invisible to optical sensors).
+
+---
+
