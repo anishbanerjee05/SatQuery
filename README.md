@@ -130,3 +130,13 @@ The graph state maintains the following fields across execution:
 
 ---
 
+### Node 1: Router
+
+The Router node classifies incoming requests into specialist pipelines using a combination of declared input modality and question semantics:
+
+- Modality Overrides: If `input_type == "bitemporal"`, the task automatically maps to `change_detection`. If `input_type == "optical_sar"`, the task maps to `fusion`.
+- Keyword & Intent Analysis: For single-image inputs, the query is analyzed for spatial location keywords (such as "where is", "locate", "find", "detect", "bounding box"). Presence of spatial keywords routes to `grounding`; general descriptive inquiries route to `vqa_captioning`.
+- Deterministic Execution: Fallbacks ensure unresolvable queries default safely to the VQA pipeline rather than throwing exceptions.
+
+---
+
