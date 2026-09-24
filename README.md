@@ -471,3 +471,35 @@ Cloudflare R2 provides zero-cost data egress, making it ideal for serving multi-
 
 ---
 
+## Production Deployment
+
+### Backend Deployment (Railway or Fly.io)
+
+The backend ships with a multi-stage Dockerfile (`satquery-backend/Dockerfile`) optimized for production container runtimes:
+
+1. Deploy via Railway:
+   - Create a new project pointing to your GitHub repository.
+   - Set the root directory to `/satquery-backend`.
+   - Add your environment variables (`OPENROUTER_API_KEY`, `DATABASE_URL`, `STORAGE_PROVIDER`).
+   - Railway will build the container and provide an HTTPS endpoint.
+
+2. Deploy via Fly.io:
+   ```bash
+   cd satquery-backend
+   fly launch --name satquery-api
+   fly secrets set OPENROUTER_API_KEY="your-key-here"
+   fly deploy
+   ```
+
+### Frontend Deployment (Vercel)
+
+Deploy the Next.js frontend with optimal edge caching:
+
+1. Import your repository into the Vercel dashboard.
+2. Select the `/satquery-frontend` folder as the root directory.
+3. Configure Environment Variables:
+   - `NEXT_PUBLIC_API_URL`: Your deployed backend URL (e.g. `https://satquery-api.up.railway.app`).
+4. Click Deploy. Vercel automatically builds and hosts the interface on global edge networks.
+
+---
+
