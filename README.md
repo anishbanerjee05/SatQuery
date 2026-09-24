@@ -208,3 +208,39 @@ Performs structural and semantic verification before releasing data to the API c
 
 ---
 
+### Node 5: Output Formatter
+
+Assembles validated state data into a strict JSON contract returned to the client:
+
+```json
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "question": "Locate the primary aircraft runway and airport taxiways.",
+  "input_type": "single",
+  "task": "grounding",
+  "answer": "The primary asphalt runway spans diagonally across the central quadrant with two parallel taxiways running adjacent.",
+  "confidence": 0.88,
+  "bounding_boxes": [
+    {
+      "box_2d": [0.24, 0.12, 0.42, 0.88],
+      "label": "primary_runway",
+      "confidence": 0.92
+    },
+    {
+      "box_2d": [0.44, 0.18, 0.52, 0.82],
+      "label": "taxiway_alpha",
+      "confidence": 0.85
+    }
+  ],
+  "visual_evidence": {
+    "overlay_url": "https://storage.satquery.ai/overlays/3fa85f64-overlay.png",
+    "diff_map_url": null,
+    "composite_url": null,
+    "change_percentage": null
+  },
+  "created_at": "2026-09-24T20:30:00Z"
+}
+```
+
+---
+
