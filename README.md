@@ -197,3 +197,14 @@ Bridges complementary remote sensing physics across visible and microwave spectr
 
 ---
 
+### Node 4: Validation
+
+Performs structural and semantic verification before releasing data to the API caller:
+
+- Coordinate Clamping: Ensures all returned bounding box values strictly conform to `0.0 <= coord <= 1.0` and that `ymin < ymax` and `xmin < xmax`.
+- Non-Empty Safeguards: Verifies the specialist produced a coherent textual explanation; triggers automatic retry prompts with simplified constraints if null or corrupt responses occur.
+- Confidence Assessment: Calculates an overall confidence metric (range `0.0` to `1.0`) combining model self-reported certainty, bounding box geometric plausibility, and input image resolution.
+- Flagging & Warnings: Attaches advisory warnings if resolution limits reduce identification certainty (e.g. attempting to count small vehicles in low-resolution 10-meter Sentinel imagery).
+
+---
+
