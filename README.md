@@ -244,3 +244,56 @@ Assembles validated state data into a strict JSON contract returned to the clien
 
 ---
 
+## Getting Started
+
+### Prerequisites
+
+- Python 3.10, 3.11, or 3.12
+- Node.js 18.x or 20.x and npm
+- OpenRouter API key (obtain from openrouter.ai)
+- PostgreSQL database (optional; defaults to local SQLite `satquery.db` if unset)
+
+---
+
+### Backend Installation (FastAPI)
+
+1. Navigate to the backend directory:
+   ```bash
+   cd satquery-backend
+   ```
+
+2. Create and activate a Python virtual environment:
+   ```bash
+   # On macOS / Linux:
+   python3 -m venv .venv
+   source .venv/bin/activate
+
+   # On Windows (PowerShell):
+   python -m venv .venv
+   .venv\Scripts\Activate.ps1
+   ```
+
+3. Install project dependencies in editable development mode:
+   ```bash
+   pip install -e ".[dev]"
+   ```
+
+4. Configure environment credentials:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` to supply your `OPENROUTER_API_KEY`.
+
+5. Run database schema migrations:
+   ```bash
+   alembic upgrade head
+   ```
+
+6. Start the development server with live reload:
+   ```bash
+   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+   ```
+   The backend interactive documentation will be accessible at `http://localhost:8000/docs`.
+
+---
+
