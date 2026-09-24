@@ -161,3 +161,14 @@ Handles general analytical questions, land-cover classification queries, and hol
 
 ---
 
+### Node 3B: Bi-temporal Change Detection Engine
+
+Specialized for comparing two temporal observations of the same geographic footprint across time:
+
+- Difference Calculation: Computes pixel-wise absolute difference maps between normalized image arrays at T1 and T2:
+  `diff_map = |Image_T2 - Image_T1|`
+- Change Mask Generation: Thresholds significant difference clusters and calculates the percentage of surface alteration across the scene footprint.
+- Comparative Narrative: The vision-language model evaluates both images side-by-side alongside the calculated difference map to describe specific changes (e.g. newly paved road corridors, deforested clearings, building construction, or seasonal water body shrinkage).
+
+---
+
