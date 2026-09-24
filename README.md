@@ -297,3 +297,29 @@ Assembles validated state data into a strict JSON contract returned to the clien
 
 ---
 
+### Frontend Installation (Next.js 14)
+
+1. Open a new terminal session and navigate to the frontend directory:
+   ```bash
+   cd satquery-frontend
+   ```
+
+2. Install Node dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Configure frontend environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Ensure `NEXT_PUBLIC_API_URL` points to your backend instance (default: `http://localhost:8000`).
+
+4. Launch the Next.js development server:
+   ```bash
+   npm run dev
+   ```
+   Open your browser to `http://localhost:3000` to access the SatQuery interface.
+
+---
+
