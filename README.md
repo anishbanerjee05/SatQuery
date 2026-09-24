@@ -70,3 +70,63 @@ SatQuery supports three analytical modalities depending on the sensor payload an
 
 ---
 
+## LangGraph Agent Workflow
+
+SatQuery executes queries through a stateful graph where each node transforms a shared `AgentState` object:
+
+```
+                  +-------------------+
+                  |   Incoming Query  |
+                  +---------+---------+
+                            |
+                            v
+                  +-------------------+
+                  |    Router Node    |
+                  +---------+---------+
+                            |
+                            v
+                  +-------------------+
+                  |  Preprocess Node  |
+                  +---------+---------+
+                            |
+           +----------------+----------------+
+           |                |                |                |
+           v                v                v                v
+     +-----------+    +-----------+    +-----------+    +-----------+
+     |   VQA &   |    |  Change   |    | Spatial   |    | Optical-  |
+     |Captioning |    | Detection |    | Grounding |    |SAR Fusion |
+     +-----+-----+    +-----+-----+    +-----+-----+    +-----+-----+
+           |                |                |                |
+           +----------------+----------------+----------------+
+                            |
+                            v
+                  +-------------------+
+                  |  Validation Node  |
+                  +---------+---------+
+                            |
+                            v
+                  +-------------------+
+                  | Output Formatter  |
+                  +---------+---------+
+                            |
+                            v
+                  +-------------------+
+                  |   Final Response  |
+                  +-------------------+
+```
+
+### Shared State Attributes
+
+The graph state maintains the following fields across execution:
+
+- `question` (str): Natural language inquiry submitted by the user.
+- `input_type` (str): Declared modality (`single`, `bitemporal`, or `optical_sar`).
+- `detected_task` (str): Routing classification determined by the Router node (`vqa`, `change_detection`, `grounding`, or `fusion`).
+- `image_urls` (dict): URLs pointing to uploaded image assets (`single`, `t1`, `t2`, `optical`, `sar`).
+- `image_metadata` (dict): Extracted dimensions, color channels, and file format information.
+- `specialist_output` (dict): Raw text answers, bounding boxes, or difference metrics produced by the specialist.
+- `validation_result` (dict): Quality checks, confidence heuristic scores, and warnings.
+- `formatted_response` (dict): Final structured response payload matched to the Pydantic schema.
+
+---
+
