@@ -503,3 +503,16 @@ Deploy the Next.js frontend with optimal edge caching:
 
 ---
 
+## Troubleshooting & Frequently Encountered Scenarios
+
+| Issue Observed | Root Cause | Recommended Solution |
+| :--- | :--- | :--- |
+| **CORS blocked by browser** | Frontend origin does not match backend CORS allowlist | Verify `CORS_ORIGINS` in backend config includes `http://localhost:3000` or your Vercel domain. |
+| **OpenRouter 401 Unauthorized** | Missing or expired API key | Check that `OPENROUTER_API_KEY` is present in `.env` without surrounding quotation marks. |
+| **Model Rate Limit Exceeded (429)** | Free tier quota exhausted on primary model | SatQuery automatically fails over to `meta-llama/llama-3.2-11b-vision-instruct:free`. You can also configure paid model IDs in `.env`. |
+| **Alembic migration out of sync** | Database schema mismatch after pull | Run `alembic upgrade head` in `satquery-backend` to apply missing database revisions. |
+| **Missing image uploads on reload** | Local container restarted with ephemeral disk | Mount a persistent storage volume to `/app/static/uploads` or configure Cloudflare R2 object storage. |
+| **Bounding boxes offset on frontend** | Custom canvas dimension scaling issue | Grounding boxes use normalized coordinates `[0.0, 1.0]`; ensure parent container retains CSS `position: relative`. |
+
+---
+
