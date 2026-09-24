@@ -151,3 +151,13 @@ The Preprocess node prepares satellite imagery for downstream multimodal vision-
 
 ---
 
+### Node 3A: VQA & Scene Captioning Specialist
+
+Handles general analytical questions, land-cover classification queries, and holistic scene descriptions:
+
+- Visual Question Answering: Evaluates questions such as "What type of agricultural patterns are visible?" or "Estimate the percentage of cloud cover over the harbor."
+- Chain-of-Thought Inspection: Prompts vision-language models to structure answers into observation, analysis, and conclusion sections.
+- Metric Extraction: Identifies quantitative details mentioned in the scene (such as estimated vessel counts, road densities, or vegetation health indices).
+
+---
+
