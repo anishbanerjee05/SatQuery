@@ -348,3 +348,59 @@ Assembles validated state data into a strict JSON contract returned to the clien
 
 ---
 
+## REST API Reference
+
+The backend exposes RESTful endpoints supporting both JSON queries and multipart binary image uploads:
+
+### 1. Health Verification
+
+`GET /health`
+
+Verifies backend runtime health, database connectivity, and agent availability.
+
+**Response (200 OK):**
+```json
+{
+  "status": "healthy",
+  "version": "1.0.0",
+  "database": "connected",
+  "agent_graph": "ready"
+}
+```
+
+---
+
+### 2. Submit Satellite Query
+
+`POST /query`
+
+Dispatches an Earth observation task to the LangGraph agent pipeline.
+
+**Content-Type:** `multipart/form-data`
+
+**Request Parameters:**
+
+| Field | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `question` | string | Yes | Plain-language question or analytical task prompt |
+| `input_type` | string | No | Modality selector: `single` (default), `bitemporal`, or `optical_sar` |
+| `image_single` | file | Optional | Primary optical scene for single-image VQA or spatial grounding |
+| `image_t1` | file | Optional | Earlier timestamp image (T1) for change detection |
+| `image_t2` | file | Optional | Later timestamp image (T2) for change detection |
+| `image_optical` | file | Optional | Visible spectrum RGB image for sensor fusion |
+| `image_sar` | file | Optional | Synthetic Aperture Radar amplitude image for sensor fusion |
+
+---
+
+### 3. Query History & Retrieval
+
+`GET /history`
+
+Retrieves historical satellite analysis sessions ordered by most recent submission.
+
+**Query Parameters:**
+- `limit` (integer, optional, default: 20): Maximum records returned.
+- `offset` (integer, optional, default: 0): Pagination offset.
+
+---
+
