@@ -445,3 +445,29 @@ curl -X POST "http://localhost:8000/query" \
 
 ---
 
+## Storage Architecture & Cloud Backends
+
+SatQuery supports a unified storage service abstraction (`app/services/storage.py`) that operates transparently across local disks and S3-compatible cloud object stores:
+
+### 1. Local Filesystem (Default)
+
+During local evaluation or disconnected offline development, SatQuery saves uploaded images and visual evidence overlays directly to `satquery-backend/static/uploads/`.
+- No cloud credentials or external network access required.
+- Files are served by FastAPI via StaticFiles mount at `/static/uploads/`.
+
+### 2. Cloudflare R2 / AWS S3 Setup
+
+For production deployments, set `STORAGE_PROVIDER=cloudflare_r2` or `STORAGE_PROVIDER=s3` in your `.env`:
+
+```ini
+STORAGE_PROVIDER=cloudflare_r2
+STORAGE_BUCKET_NAME=satquery-production
+S3_ENDPOINT_URL=https://<your-account-id>.r2.cloudflarestorage.com
+AWS_ACCESS_KEY_ID=<your-r2-access-key-id>
+AWS_SECRET_ACCESS_KEY=<your-r2-secret-access-key>
+```
+
+Cloudflare R2 provides zero-cost data egress, making it ideal for serving multi-megabyte high-resolution satellite imagery to web clients.
+
+---
+
