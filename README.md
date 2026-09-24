@@ -172,3 +172,17 @@ Specialized for comparing two temporal observations of the same geographic footp
 
 ---
 
+### Node 3C: Spatial Visual Grounding
+
+Identifies specific physical features and objects within the scene and returns normalized bounding box coordinates:
+
+- Normalized Coordinate Format: Returns bounding boxes in standardized `[ymin, xmin, ymax, xmax]` float values scaled between `0.0` and `1.0`:
+  - `ymin`: Top edge coordinate normalized to image height.
+  - `xmin`: Left edge coordinate normalized to image width.
+  - `ymax`: Bottom edge coordinate normalized to image height.
+  - `xmax`: Right edge coordinate normalized to image width.
+- Resolution-Independent Scaling: Coordinates render dynamically on the frontend canvas regardless of display screen DPI or container resizing.
+- Multi-Class Tagging: Accompanies every bounding box with a specific object classification label (e.g. `storage_tank`, `runway`, `vessel`, `bridge`, `crane`) and detected confidence.
+
+---
+
